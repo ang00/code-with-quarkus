@@ -4,6 +4,7 @@ import org.acme.daman.Book;
 import org.acme.repository.BookRepository;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
@@ -30,7 +31,7 @@ public class BookApi {
 
     @Path("/{id}")
     @GET
-    public Response get(@PathParam("id") int id){
+    public Response get(@PathParam("id") Long id){
         return bookRepository.findById(id)
                 .map(Response::ok)
                 .orElse(Response.status(NOT_FOUND))
@@ -39,6 +40,7 @@ public class BookApi {
 
     @POST
     @Path("/")
+    @Transactional
     public Response post(Book book){
         return Optional.of(bookRepository.save(book))
                 .map(Response::ok)
@@ -47,6 +49,7 @@ public class BookApi {
     }
     @PUT
     @Path("/")
+    @Transactional
     public Response put(Book book){
         return Optional.of(bookRepository.save(book))
                 .map(Response::ok)
@@ -56,7 +59,8 @@ public class BookApi {
 
     @DELETE
     @Path("/{id}")
-    public Response delete(@PathParam("id") Integer id){
+    @Transactional
+    public Response delete(@PathParam("id") Long id){
         return bookRepository.findById(id)
                 .map(b -> {
                     bookRepository.delete(b);

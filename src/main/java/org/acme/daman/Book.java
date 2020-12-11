@@ -1,9 +1,6 @@
 package org.acme.daman;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @Author: zhangyy
@@ -13,23 +10,31 @@ import javax.persistence.Table;
  * @Modified：
  * @Description:
  */
-@Table(name = "book")
+//@Table(name = "t_book")
 @Entity
 public class Book {
     @Id
-    @GeneratedValue
-    private Integer id;
-    private String name, title, author,desc;
+    @GeneratedValue //(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id")
+    private Long id;
+//    @Column(name = "name")
+    private String name;
+//    @Column(name = "title")
+    private String title;
+//    @Column(name = "author")
+    private String author;
+//    @Column(name = "desc")
+    private String desc;
 
     public Book() {
     }
 
-    public Book(int id, String name) {
+    public Book(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Book(int id, String name, String title, String author, String desc) {
+    public Book(Long id, String name, String title, String author, String desc) {
         this.id = id;
         this.name = name;
         this.title = title;
@@ -37,11 +42,11 @@ public class Book {
         this.desc = desc;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

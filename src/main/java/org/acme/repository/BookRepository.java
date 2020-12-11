@@ -11,5 +11,5 @@ import org.springframework.data.repository.CrudRepository;
  * @Modified：
  * @Description:
  */
-public interface BookRepository extends CrudRepository<Book, Integer> {
+public interface BookRepository extends CrudRepository<Book, Long> {
 }
